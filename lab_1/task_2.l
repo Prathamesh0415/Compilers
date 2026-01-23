@@ -24,7 +24,7 @@ int neg_fracs = 0;
 int main(void){
     yylex();
     printf("\n");
-    printf("%d %d %d %d\n", pos_counter, neg_counter, pos_fracs, neg_fracs);
+    printf("positive: %d negative: %d positive fractions: %d negative fractions: %d\n", pos_counter, neg_counter, pos_fracs, neg_fracs);
     return 0;
 }
 

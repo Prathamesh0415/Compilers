@@ -2,7 +2,7 @@
     #include<stdio.h>    
     int char_count = 0;
     int word_count = 0;
-    int line_count = 0;
+    int line_count = 1;
 %}
 
 %%
@@ -14,7 +14,7 @@
 
 int main(void){
     yylex();
-    printf("\n%d %d %d", char_count, word_count, line_count);
+    printf("\ncharacter count: %d word count: %d line count: %d\n", char_count, word_count, line_count);
     return 0;
 }
 

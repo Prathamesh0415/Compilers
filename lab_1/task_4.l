@@ -4,16 +4,16 @@ int found = 0;
 %}
 
 %%
-[^a-zA-Z\n]   { found = 1; }
-[a-zA-Z\n]    { }
+[^a-zA-Z \t\n]   { found = 1; }
+[a-zA-Z\t\n]    { }
 %%
 
 int main() {
     yylex();
     if(found)
-        printf("Non-alphabet character found\n");
+        printf("\nNon-alphabet character found\n");
     else
-        printf("Only alphabets present\n");
+        printf("\nOnly alphabets present\n");
     return 0;
 }
 

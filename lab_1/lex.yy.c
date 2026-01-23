@@ -664,12 +664,7 @@ YY_DECL
 	{
 #line 5 "task_5.l"
 
-
-#line 8 "task_5.l"
-    /* 1. MATCH VALID STRINGS (3 to 5 letters)
-       Flex checks this rule first. If a word is 3, 4, or 5 letters, 
-       it matches this. */
-#line 673 "lex.yy.c"
+#line 668 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -728,31 +723,26 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "task_5.l"
-{ printf("Valid string: %s\n", yytext); }
+#line 6 "task_5.l"
+{ printf("\nValid string: %s\n", yytext); }
 	YY_BREAK
-/* 2. IGNORE OTHER WORDS (Longer or shorter)
-       If a word is 6+ letters (e.g., "banana"), this rule matches MORE 
-       characters than rule #1, so Flex picks this one.
-       If a word is 1-2 letters (e.g., "is"), rule #1 fails, so it picks this. */
 case 2:
 YY_RULE_SETUP
-#line 17 "task_5.l"
-{ /* Do nothing */ }
+#line 7 "task_5.l"
+{  }
 	YY_BREAK
-/* 3. IGNORE EVERYTHING ELSE (Spaces, punctuation, etc.) */
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 20 "task_5.l"
-{ /* Do nothing */ }
+#line 8 "task_5.l"
+{  }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 22 "task_5.l"
+#line 9 "task_5.l"
 ECHO;
 	YY_BREAK
-#line 756 "lex.yy.c"
+#line 746 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1757,11 +1747,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 22 "task_5.l"
+#line 9 "task_5.l"
 
 
 int main() {
-    printf("Enter strings:\n");
     yylex();
     return 0;
 }

@@ -3,7 +3,7 @@
 %}
 
 %%
-[a-zA-Z]{3,5} { printf("Valid string: %s\n", yytext); }
+[a-zA-Z]{3,5} { printf("\nValid string: %s\n", yytext); }
 [a-zA-Z]+     {  }
 .|\n          {  }
 %%
