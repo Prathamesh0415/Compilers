@@ -2,7 +2,7 @@
     #include<stdio.h>
     int yylex(void);
     void yyerror(char *);
-    int sym[26]
+    int sym[26];
 %}
 
 %token INTEGER VARIABLE
@@ -11,13 +11,19 @@
 
 
 %%
-start: start expr '\n' {printf("%d\n", $2);}
+program: program statement '\n'
        |
        ;
-expr: INTEGER {$$ = $1;}
-    | expr '+' expr {$$ = $1 + $3;}
-    | expr '-' expr {$$ = $1 - $3;}
-    ;    
+statement: expr {printf("%d\n", $1);}
+         | VARIABLE '=' expr {sym[$1] = $3;}
+expr: INTEGER
+    | VARIABLE
+    | expr '+' expr { $$ = $1 + $3; }
+    | expr '-' expr { $$ = $1 - $3; }
+    | expr '*' expr { $$ = $1 * $3; }
+    | expr '/' expr { $$ = $1 / $3; }
+    | '(' expr ')'  { $$ = $2; }
+    ;
 %%
 
 void yyerror(char *s){

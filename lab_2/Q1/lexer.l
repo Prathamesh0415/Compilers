@@ -6,8 +6,7 @@
 %%
 a { return A;}
 b {return B;}
-ba {return INVALID;}
-\n {return 0;}
+\n {return NL;}
 . {return INVALID;}
 %%
 

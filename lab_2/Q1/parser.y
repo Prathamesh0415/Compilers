@@ -3,12 +3,16 @@
     #include<stdlib.h>
     int yylex();
     void yyerror(const char *s);
+    int flag = 0;
 %}
 
-%token A B INVALID 
+%token A B INVALID NL
 
 %%
-start: expr {printf("This is a valid expression of the form a^nb^n. \n");} 
+program: program start
+        | start
+        ;
+start: expr NL {printf("This is a valid expression of the form a^nb^n. \n");} 
 expr : A expr B
      |
 %%
