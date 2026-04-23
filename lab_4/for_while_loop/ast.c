@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// --- Constructors ---
 ASTNode* make_stmt(char* text) {
     ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
     node->type = NODE_STMT;
@@ -38,30 +37,24 @@ ASTNode* make_while(ASTNode* cond, ASTNode* body) {
     return node;
 }
 
-// --- The Converter ---
 void print_as_while(ASTNode* node, ASTNode* current_for_inc) {
     if (!node) return;
 
     switch (node->type) {
         case NODE_FOR:
-            // 1. Init outside the loop
             if (node->init) { print_as_while(node->init, NULL); printf(";\n"); }
-            
-            // 2. While condition
+
             printf("while (");
             if (node->cond) print_as_while(node->cond, NULL); else printf("1");
             printf(") {\n");
 
-            // 3. Body (Pass increment down in case of 'continue')
             print_as_while(node->body, node->inc);
 
-            // 4. Increment at the bottom
             if (node->inc) { print_as_while(node->inc, NULL); printf(";\n"); }
             printf("}\n");
             break;
 
         case NODE_DO_WHILE:
-            // Translate to standard while(1) pattern
             printf("while (1) {\n");
             print_as_while(node->body, NULL);
             printf("if (!(");
@@ -73,12 +66,11 @@ void print_as_while(ASTNode* node, ASTNode* current_for_inc) {
             printf("while (");
             print_as_while(node->cond, NULL);
             printf(") {\n");
-            print_as_while(node->body, NULL); // normal while loops don't pass an increment
+            print_as_while(node->body, NULL);
             printf("}\n");
             break;
 
         case NODE_CONTINUE:
-            // THE FIX: Inject increment if we came from a FOR loop
             if (current_for_inc) { print_as_while(current_for_inc, NULL); printf(";\n"); }
             printf("continue;\n");
             break;
@@ -92,6 +84,5 @@ void print_as_while(ASTNode* node, ASTNode* current_for_inc) {
             break;
     }
 
-    // Process the next line of code
     print_as_while(node->next, current_for_inc);
 }
